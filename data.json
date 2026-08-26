@@ -52,7 +52,7 @@
 		},
 		{
 			"id": "moIt",
-			"label": "Monthly Item (August 2026)",
+			"label": "Monthly Item 2026",
 			"type": "table",
 			"columns": [
 				{ "label": "Item Name", "field": "name" },
@@ -61,9 +61,16 @@
 				{ "label": "Max Price", "field": "price", "type": "price" }
 			],
 			"items": [
+				{ "name": "Shirakami Fubuki (Nuigurumi)", "img": "v1787747162/Web/fubuki_big_nui.webp", "date": "07/17 Friday", "price": 1600 },
 				{ "name": "Nana (Aqua Float Girls)", "img": "v1785757035/Web/nana_aqua_float.jpg", "date": "08/22 Saturday", "price": 1200 },
-				{ "name": "Watame (Relax time)", "img": "v1786690080/Web/watame_relaxtime.jpg", "date": "08/27 Thursday", "price": 1600 },
-				{ "name": "Mikan (Desktop Cute)", "img": "v1785757034/Web/mikan_desktop_cute.jpg", "date": "08/28 Friday", "price": 1200 }
+				{ "name": "Tsunomaki Watame (Relax time)", "img": "v1787746994/Web/watame_relax.jpg", "date": "08/27 Thursday", "price": 1600 },
+				{ "name": "Mikan (Desktop Cute)", "img": "v1785757034/Web/mikan_desktop_cute.jpg", "date": "08/28 Friday", "price": 1200 },
+				{ "name": "初音ミク Birthday 2026 AMP＋ フィギュア～Star Dreamy ver.～", "img": "v1787748167/Web/miku_birthday_2026.jpg", "date": "08/29 Saturday", "price": 1600 },
+				{ "name": "Inugami Korone (Nuigurumi)", "img": "v1787747162/Web/korone_big_nui.webp", "date": "08/? ???", "price": 1600 },
+				{ "name": "Nekomata Okayu (Nuigurumi)", "img": "v1787747162/Web/okayu_big_nui.webp", "date": "08/? ???", "price": 1600 },
+				{ "name": "Kazama Iroha (Relax time)", "img": "v1787748308/Web/iroha_relax.jpg", "date": "09/25 Friday", "price": 1600 },
+				{ "name": "雪ミク AMP＋ SNOW MIKU ALL STARS フィギュア～2013ver.～", "img": "v1787748309/Web/snow_miku_allstars_2013.jpg", "date": "09/30 Wednesday", "price": 1600 },
+				{ "name": "雪ミク AMP＋ SNOW MIKU ALL STARS フィギュア～2012ver.～", "img": "v1787748309/Web/snow_miku_allstars_2012.jpg", "date": "09/30 Wednesday", "price": 1600 }
 			]
 		}
 	]
