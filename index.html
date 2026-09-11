@@ -1,45 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
 	<meta charset="utf-8"/>
 	<title>✦ Wishlist</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+	<meta name="theme-color" content="#04100f"/>
+	<meta name="color-scheme" content="dark"/>
+	<meta name="description" content="Figures and plushies I'm collecting, mostly Hololive, with the most I'll pay for each."/>
 	<meta name="wb_main" content="wb_element c019c0c32c9b77c9cb774f03a2df46467b94c8c7878956c23547bad2be882d26" />
 	<link rel="icon" href="favicon.ico" sizes="any"/>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 	<script defer src="render.js"></script>
 
 	<style type="text/css">
 		:root {
 			--bg-0: #04100f;
 			--bg-1: #07211e;
-			--glass: rgba(255, 255, 255, 0.05);
-			--glass-brd: rgba(255, 255, 255, 0.12);
+			--surface: rgba(255, 255, 255, 0.05);
+			--line: rgba(255, 255, 255, 0.12);
 			--accent-a: #44bfb7;   /* teal       */
 			--accent-b: #9ff0ea;   /* aqua       */
 			--accent-c: #1f8f88;   /* deep teal  */
 			--ink: #eafbf9;
 			--ink-dim: #a8cfca;
+			--ink-faint: rgba(234, 251, 249, 0.55);
+			--on-accent: #042421;
+			--gutter: 1rem;
 		}
 
 		* { box-sizing: border-box; }
 
-		html, body { background: var(--bg-0); }
+		html { background: var(--bg-0); -webkit-text-size-adjust: 100%; }
+		html:has(dialog[open]) { overflow: hidden; }
 
 		body {
 			min-height: 100vh;
+			min-height: 100dvh;
 			margin: 0;
 			color: var(--ink);
+			background: var(--bg-0);
 			font-family: "Poppins", system-ui, sans-serif;
 			overflow-x: hidden;
 			position: relative;
+			-webkit-tap-highlight-color: transparent;
 		}
 
 		/* Animated aurora backdrop */
@@ -53,10 +61,10 @@
 				radial-gradient(45% 45% at 80% 15%, rgba(31, 143, 136, 0.32), transparent 60%),
 				radial-gradient(50% 50% at 50% 90%, rgba(159, 240, 234, 0.26), transparent 60%),
 				var(--bg-1);
-			filter: blur(10px);
 			animation: drift 22s ease-in-out infinite alternate;
+			will-change: transform;
 		}
-		/* Subtle grain/vignette */
+		/* Vignette */
 		body::after {
 			content: "";
 			position: fixed;
@@ -72,21 +80,22 @@
 			100% { transform: translate3d(-2%, 3%, 0) scale(1.05) rotate(-3deg); }
 		}
 
-		.shell { max-width: 1180px; margin: 0 auto; padding: 0 1.1rem 5rem; }
+		.shell {
+			max-width: 1180px;
+			margin: 0 auto;
+			padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+			padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+		}
 
 		/* ---- Hero ---- */
-		.hero { text-align: center; padding: 4.5rem 1rem 2.5rem; }
-		.hero .kicker {
-			font-size: .8rem;
-			letter-spacing: .42em;
-			text-transform: uppercase;
-			color: var(--ink-dim);
-			margin-bottom: 1rem;
+		.hero {
+			text-align: center;
+			padding: calc(2.25rem + env(safe-area-inset-top)) var(--gutter) 1.5rem;
 		}
 		.hero h1 {
 			font-family: "Sora", sans-serif;
 			font-weight: 800;
-			font-size: clamp(2.6rem, 7vw, 5rem);
+			font-size: clamp(2.75rem, 13vw, 5rem);
 			line-height: 1.02;
 			margin: 0;
 			background: linear-gradient(100deg, var(--accent-c), var(--accent-a) 45%, var(--accent-b));
@@ -95,162 +104,258 @@
 			color: transparent;
 			filter: drop-shadow(0 6px 30px rgba(68, 191, 183, 0.45));
 		}
-		.hero p { color: var(--ink-dim); margin: 1rem auto 0; max-width: 38rem; font-weight: 300; }
-
-		/* ---- Nav pills (rendered into #myTab) ---- */
-		.navwrap {
-			position: sticky;
-			top: .75rem;
-			z-index: 20;
-			margin: 0 auto 2.5rem;
-			width: fit-content;
-			max-width: 100%;
+		.hero p {
+			color: var(--ink-dim);
+			margin: .8rem auto 0;
+			max-width: 30rem;
+			font-size: .95rem;
+			line-height: 1.55;
 		}
-		#myTab.nav {
-			gap: .35rem;
-			flex-wrap: wrap;
+
+		/* ---- Tab bar (rendered into #tabs) ---- */
+		.tabs-wrap {
+			position: sticky;
+			top: calc(.5rem + env(safe-area-inset-top));
+			z-index: 20;
+			display: flex;
 			justify-content: center;
-			padding: .4rem;
+			margin-bottom: 1.25rem;
+		}
+		.tabs {
+			position: relative;
+			display: flex;
+			gap: .25rem;
+			max-width: 100%;
+			padding: .3rem;
+			overflow-x: auto;
+			scrollbar-width: none;
 			border-radius: 999px;
-			background: var(--glass);
-			border: 1px solid var(--glass-brd);
+			background: rgba(7, 33, 30, 0.72);
+			border: 1px solid var(--line);
 			backdrop-filter: blur(16px);
 			-webkit-backdrop-filter: blur(16px);
 			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 		}
-		#myTab .nav-link {
+		.tabs::-webkit-scrollbar { display: none; }
+		.tab {
+			flex: none;
+			display: inline-flex;
+			align-items: center;
+			gap: .45rem;
+			min-height: 2.75rem;
+			padding: 0 1rem;
 			border: 0;
 			border-radius: 999px;
-			padding: .5rem 1.15rem;
-			font-weight: 500;
-			font-size: .92rem;
-			color: var(--ink-dim);
 			background: transparent;
-			transition: color .2s, background .2s, transform .2s;
+			color: var(--ink-dim);
+			font: inherit;
+			font-size: .92rem;
+			font-weight: 500;
+			white-space: nowrap;
+			cursor: pointer;
+			transition: color .2s, background .2s;
 		}
-		#myTab .nav-link:hover { color: var(--ink); transform: translateY(-1px); }
-		#myTab .nav-link.active {
-			color: #042421;
+		.tab-count {
+			min-width: 1.5rem;
+			padding: .1rem .4rem;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.08);
+			font-size: .75rem;
+			font-weight: 500;
+			text-align: center;
+		}
+		.tab[aria-selected="true"] {
+			color: var(--on-accent);
 			font-weight: 600;
 			background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
-			box-shadow: 0 6px 22px rgba(68, 191, 183, 0.5);
+			box-shadow: 0 6px 22px rgba(68, 191, 183, 0.45);
 		}
+		.tab[aria-selected="true"] .tab-count { background: rgba(4, 36, 33, 0.16); }
+		.tab:focus-visible { outline: 2px solid var(--ink); outline-offset: -3px; }
 
-		/* ---- Card grid (rendered by render.js) ---- */
-		.tab-pane { animation: rise .5s ease both; }
-		@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+		/* ---- Panels and card grid (rendered by render.js) ---- */
+		.panel-note {
+			margin: 0 0 1rem;
+			text-align: center;
+			color: var(--ink-dim);
+			font-size: .9rem;
+		}
+		.panel-empty, .load-error {
+			text-align: center;
+			padding: 3rem 1rem;
+			color: var(--ink-dim);
+		}
+		.load-error { color: #ff8fa3; }
 
-		.wish-grid {
+		.grid {
+			list-style: none;
+			margin: 0;
+			padding: 0;
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-			gap: 1.4rem;
+			grid-template-columns: repeat(auto-fill, minmax(9.25rem, 1fr));
+			gap: .75rem;
 		}
 
-		.wish-card {
-			position: relative;
-			border-radius: 20px;
+		.card {
+			display: flex;
+			flex-direction: column;
+			border-radius: 16px;
 			overflow: hidden;
-			background: var(--glass);
-			border: 1px solid var(--glass-brd);
-			backdrop-filter: blur(14px);
-			-webkit-backdrop-filter: blur(14px);
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-			transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+			background: var(--surface);
+			border: 1px solid var(--line);
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 		}
-		/* Glow ring on hover */
-		.wish-card::after {
-			content: "";
-			position: absolute;
-			inset: 0;
-			border-radius: inherit;
-			padding: 1px;
-			background: linear-gradient(135deg, var(--accent-c), var(--accent-a), var(--accent-b));
-			-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-			-webkit-mask-composite: xor;
-			mask-composite: exclude;
-			opacity: 0;
-			transition: opacity .35s;
-			pointer-events: none;
-		}
-		.wish-card:hover {
-			transform: translateY(-8px);
-			box-shadow: 0 22px 50px rgba(68, 191, 183, 0.4);
-			border-color: transparent;
-		}
-		.wish-card:hover::after { opacity: 1; }
-
-		.wish-card-img {
-			position: relative;
+		.card-img {
+			display: block;
+			width: 100%;
 			aspect-ratio: 1 / 1;
+			padding: 0;
+			border: 0;
 			overflow: hidden;
 			background: rgba(0, 0, 0, 0.25);
+			cursor: zoom-in;
 		}
-		.wish-card-img img {
+		.card-img img {
+			display: block;
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			transition: transform .5s cubic-bezier(.2,.8,.2,1);
 		}
-		.wish-card:hover .wish-card-img img { transform: scale(1.08); }
+		.card-img:focus-visible { outline: 2px solid var(--accent-b); outline-offset: -2px; }
 
-		.wish-card-body { padding: .95rem 1.05rem 1.1rem; }
-		.wish-card-title {
-			font-family: "Sora", sans-serif;
-			font-size: 1.02rem;
-			font-weight: 600;
-			margin: 0 0 .35rem;
-			line-height: 1.25;
+		.card-body {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			gap: .35rem;
+			padding: .7rem .8rem .85rem;
 		}
-		.wish-meta {
-			display: block;
-			font-size: .82rem;
+		.card-title {
+			font-family: "Sora", sans-serif;
+			font-size: .9rem;
+			font-weight: 600;
+			line-height: 1.3;
+			margin: 0;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			overflow-wrap: anywhere;
+		}
+		.card-date {
+			margin: 0;
+			font-size: .78rem;
 			color: var(--ink-dim);
-			margin-top: .15rem;
 		}
-		.wish-meta-label { color: rgba(255,255,255,0.45); margin-right: .35rem; }
+		.card-when { display: block; color: var(--ink-faint); }
+		.card-date.is-upcoming .card-when { color: var(--accent-b); font-weight: 500; }
 
-		.wish-price {
-			display: inline-block;
-			margin-top: .7rem;
-			padding: .28rem .7rem;
+		/* margin-top: auto pins the price to the bottom so prices line up across a row. */
+		.card-price {
+			align-self: flex-start;
+			margin: auto 0 0;
+			padding: .25rem .65rem;
 			border-radius: 999px;
-			font-size: .82rem;
+			font-size: .8rem;
 			font-weight: 600;
-			color: #042421;
+			color: var(--on-accent);
 			background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
-			box-shadow: 0 4px 14px rgba(68, 191, 183, 0.4);
+		}
+		.card-price span { font-weight: 500; opacity: .7; }
+
+		@media (min-width: 640px) {
+			.hero { padding-top: calc(4.5rem + env(safe-area-inset-top)); padding-bottom: 2.5rem; }
+			.hero p { font-size: 1rem; }
+			.tabs-wrap { margin-bottom: 1.75rem; }
+			.grid { grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1.25rem; }
+			.card { border-radius: 20px; }
+			.card-body { padding: .95rem 1.05rem 1.1rem; }
+			.card-title { font-size: 1.02rem; }
+			.card-date, .card-price { font-size: .82rem; }
 		}
 
-		/* ---- Home / freeform panes ---- */
-		.home-pane {
-			text-align: center;
-			padding: 2rem 1rem;
-			max-width: 46rem;
-			margin: 0 auto;
+		/* Hover effects only where there is a real pointer, so they don't stick after a tap. */
+		@media (hover: hover) {
+			.card { transition: border-color .3s, box-shadow .3s; }
+			.card:hover { border-color: rgba(159, 240, 234, 0.45); box-shadow: 0 18px 44px rgba(68, 191, 183, 0.28); }
+			.card-img img { transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+			.card:hover .card-img img { transform: scale(1.05); }
+			.tab:not([aria-selected="true"]):hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }
 		}
-		.home-pane h1 {
+
+		/* ---- Photo viewer ---- */
+		.viewer {
+			max-width: min(92vw, 40rem);
+			max-height: 92dvh;
+			padding: 0;
+			border: 0;
+			background: transparent;
+			color: var(--ink);
+			overflow: visible;
+		}
+		.viewer::backdrop {
+			background: rgba(2, 10, 9, 0.88);
+			backdrop-filter: blur(6px);
+			-webkit-backdrop-filter: blur(6px);
+		}
+		.viewer figure {
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: .8rem;
+		}
+		.viewer img {
+			display: block;
+			max-width: 100%;
+			max-height: calc(92dvh - 7rem);
+			border-radius: 16px;
+			object-fit: contain;
+		}
+		.viewer figcaption {
 			font-family: "Sora", sans-serif;
-			font-weight: 800;
-			background: linear-gradient(100deg, var(--accent-c), var(--accent-b));
-			-webkit-background-clip: text; background-clip: text; color: transparent;
+			font-weight: 600;
+			text-align: center;
+			line-height: 1.35;
 		}
-		.home-pane p { color: var(--ink-dim); font-weight: 300; }
+		.viewer-close {
+			min-height: 2.75rem;
+			padding: 0 1.4rem;
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			background: var(--surface);
+			color: var(--ink);
+			font: inherit;
+			font-weight: 500;
+			cursor: pointer;
+		}
+		.viewer-close:focus-visible { outline: 2px solid var(--accent-b); outline-offset: 2px; }
 
-		.load-error { color: #ff8fa3; text-align: center; padding: 3rem; }
+		@media (prefers-reduced-motion: reduce) {
+			body::before { animation: none; }
+			.card-img img, .card, .tab { transition: none; }
+		}
 	</style>
 </head>
 <body>
 	<header class="hero">
-		<div class="kicker">✦ personal collection ✦</div>
 		<h1>Wishlist</h1>
-		<p>A curated lineup of figures &amp; plushies I'm hunting for. Browse by series below.</p>
+		<p>Figures and plushies I'm collecting, mostly Hololive. The price on each item is the most I'll pay for it, in yen.</p>
 	</header>
 
-	<div class="shell">
-		<div class="navwrap">
-			<ul class="nav" id="myTab" role="tablist"></ul>
-		</div>
-		<div class="tab-content" id="myTabContent"></div>
-	</div>
+	<main class="shell">
+		<nav class="tabs-wrap" aria-label="Wishlist categories">
+			<div class="tabs" id="tabs" role="tablist"></div>
+		</nav>
+		<div id="panels"></div>
+	</main>
+
+	<dialog class="viewer" id="viewer" aria-label="Photo">
+		<figure>
+			<img alt=""/>
+			<figcaption></figcaption>
+			<button class="viewer-close" type="button">Close</button>
+		</figure>
+	</dialog>
 </body>
 </html>

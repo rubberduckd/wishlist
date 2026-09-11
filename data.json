@@ -2,20 +2,9 @@
 	"imageBase": "https://res.cloudinary.com/tsukiko/image/upload/",
 	"tabs": [
 		{
-			"id": "home",
-			"label": "Home",
-			"type": "home",
-			"html": "<h1>Welcome ✦</h1>\n<p>This is my personal wishlist of Hololive figures &amp; plushies — the pieces I'm actively collecting and the ones still on the hunt. Browse the tabs above to see what I'm after.</p>\n<p>Each item shows a <strong>Max Price</strong> in yen (円) - the most I'm willing to pay for it. Anything around or below that is fair game.</p>\n<hr class=\"opacity-25 my-4\">\n<p class=\"mb-2\"><strong>What's in each tab</strong></p>\n<ul class=\"list-unstyled\">\n<li>🧸 <strong>Hololive Nuigurimi</strong> — plushies on my list</li>\n<li>🎏 <strong>Hololive Hikkake</strong> — Hikkake prize figures</li>\n<li>🔍 <strong>Looking for</strong> — hard-to-find items &amp; loose boxes</li>\n<li>🗓️ <strong>Monthly Item</strong> — upcoming releases I'm watching</li>\n</ul>\n<p class=\"text-secondary\">Thanks for stopping by — happy hunting! ✦</p>"
-		},
-		{
-			"id": "hlNu",
-			"label": "Hololive Nuigurimi",
-			"type": "table",
-			"columns": [
-				{ "label": "Item Name", "field": "name" },
-				{ "label": "Image", "field": "img", "type": "image" },
-				{ "label": "Max Price", "field": "price", "type": "price" }
-			],
+			"id": "nuigurumi",
+			"label": "Nuigurumi",
+			"description": "Hololive plushies.",
 			"items": [
 				{ "name": "AZki", "img": "v1780196608/Web/azki.webp", "price": 1400 },
 				{ "name": "Sakura Miko", "img": "v1780227143/Web/miko.jpg", "price": 1400 },
@@ -24,53 +13,28 @@
 			]
 		},
 		{
-			"id": "hlHi",
-			"label": "Hololive Hikkake",
-			"type": "table",
-			"columns": [
-				{ "label": "Item Name", "field": "name" },
-				{ "label": "Image", "field": "img", "type": "image" },
-				{ "label": "Max Price", "field": "price", "type": "price" }
-			],
+			"id": "hikkake",
+			"label": "Hikkake",
+			"description": "Hololive Hikkake prize figures.",
 			"items": [
 				{ "name": "Tsunomaki Watame", "img": "v1780222592/Web/hikkake_vol02.jpg", "price": 2200 }
 			]
 		},
 		{
-			"id": "waIt",
-			"label": "Looking for",
-			"type": "table",
-			"columns": [
-				{ "label": "Item Name", "field": "name" },
-				{ "label": "Image", "field": "img", "type": "image" },
-				{ "label": "Max Price", "field": "price", "type": "price" }
-			],
+			"id": "monthly-2026",
+			"label": "Monthly 2026",
+			"description": "Releases I'm watching this year, in date order.",
 			"items": [
-				{ "name": "Hikkake Shirakami Fubuki (BOX ONLY)", "img": "v1780227740/Web/hikkake_vol08.jpg", "price": 200 },
-				{ "name": "Hikkake Tokoyami Towa (BOX ONLY)", "img": "v1780222954/Web/hikkake_vol10.jpg", "price": 200 }
-			]
-		},
-		{
-			"id": "moIt",
-			"label": "Monthly Item 2026",
-			"type": "table",
-			"columns": [
-				{ "label": "Item Name", "field": "name" },
-				{ "label": "Image", "field": "img", "type": "image" },
-				{ "label": "Release Date", "field": "date" },
-				{ "label": "Max Price", "field": "price", "type": "price" }
-			],
-			"items": [
-				{ "name": "Shirakami Fubuki (Nuigurumi)", "img": "v1787747162/Web/fubuki_big_nui.webp", "date": "07/17 Friday", "price": 1600 },
-				{ "name": "Nana (Aqua Float Girls)", "img": "v1785757035/Web/nana_aqua_float.jpg", "date": "08/22 Saturday", "price": 1200 },
-				{ "name": "Tsunomaki Watame (Relax time)", "img": "v1787746994/Web/watame_relax.jpg", "date": "08/27 Thursday", "price": 1600 },
-				{ "name": "Mikan (Desktop Cute)", "img": "v1785757034/Web/mikan_desktop_cute.jpg", "date": "08/28 Friday", "price": 1200 },
-				{ "name": "初音ミク Birthday 2026 AMP＋ フィギュア～Star Dreamy ver.～", "img": "v1787748167/Web/miku_birthday_2026.jpg", "date": "08/29 Saturday", "price": 1600 },
-				{ "name": "Inugami Korone (Nuigurumi)", "img": "v1787747162/Web/korone_big_nui.webp", "date": "08/? ???", "price": 1600 },
-				{ "name": "Nekomata Okayu (Nuigurumi)", "img": "v1787747162/Web/okayu_big_nui.webp", "date": "08/? ???", "price": 1600 },
-				{ "name": "Rayza (Desktop Cute)", "img": "v1788583347/Web/rayza_desktop_cute.jpg", "date": "09/12 Saturday", "price": 1600 },
-				{ "name": "雪ミク AMP＋ SNOW MIKU ALL STARS フィギュア～2013ver.～", "img": "v1787748309/Web/snow_miku_allstars_2013.jpg", "date": "09/30 Wednesday", "price": 1600 },
-				{ "name": "雪ミク AMP＋ SNOW MIKU ALL STARS フィギュア～2012ver.～", "img": "v1787748309/Web/snow_miku_allstars_2012.jpg", "date": "09/30 Wednesday", "price": 1600 }
+				{ "name": "Shirakami Fubuki (Nuigurumi)", "img": "v1787747162/Web/fubuki_big_nui.webp", "date": "2026-07-17", "price": 1600 },
+				{ "name": "Nana (Aqua Float Girls)", "img": "v1785757035/Web/nana_aqua_float.jpg", "date": "2026-08-22", "price": 1200 },
+				{ "name": "Tsunomaki Watame (Relax time)", "img": "v1787746994/Web/watame_relax.jpg", "date": "2026-08-27", "price": 1600 },
+				{ "name": "Mikan (Desktop Cute)", "img": "v1785757034/Web/mikan_desktop_cute.jpg", "date": "2026-08-28", "price": 1200 },
+				{ "name": "初音ミク Birthday 2026 AMP＋ フィギュア～Star Dreamy ver.～", "img": "v1787748167/Web/miku_birthday_2026.jpg", "date": "2026-08-29", "price": 1600 },
+				{ "name": "Inugami Korone (Nuigurumi)", "img": "v1787747162/Web/korone_big_nui.webp", "date": "2026-08", "price": 1600 },
+				{ "name": "Nekomata Okayu (Nuigurumi)", "img": "v1787747162/Web/okayu_big_nui.webp", "date": "2026-08", "price": 1600 },
+				{ "name": "Rayza (Desktop Cute)", "img": "v1788583347/Web/rayza_desktop_cute.jpg", "date": "2026-09-12", "price": 1600 },
+				{ "name": "雪ミク AMP＋ SNOW MIKU ALL STARS フィギュア～2013ver.～", "img": "v1787748309/Web/snow_miku_allstars_2013.jpg", "date": "2026-09-30", "price": 1600 },
+				{ "name": "雪ミク AMP＋ SNOW MIKU ALL STARS フィギュア～2012ver.～", "img": "v1787748309/Web/snow_miku_allstars_2012.jpg", "date": "2026-09-30", "price": 1600 }
 			]
 		}
 	]
