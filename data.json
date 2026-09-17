@@ -25,13 +25,6 @@
 			"label": "Monthly 2026",
 			"description": "Releases I'm watching this year, in date order.",
 			"items": [
-				{ "name": "Shirakami Fubuki (Nuigurumi)", "img": "v1787747162/Web/fubuki_big_nui.webp", "date": "2026-07-17", "price": 1600 },
-				{ "name": "Nana (Aqua Float Girls)", "img": "v1785757035/Web/nana_aqua_float.jpg", "date": "2026-08-22", "price": 1200 },
-				{ "name": "Tsunomaki Watame (Relax time)", "img": "v1787746994/Web/watame_relax.jpg", "date": "2026-08-27", "price": 1600 },
-				{ "name": "Mikan (Desktop Cute)", "img": "v1785757034/Web/mikan_desktop_cute.jpg", "date": "2026-08-28", "price": 1200 },
-				{ "name": "初音ミク Birthday 2026 AMP＋ フィギュア～Star Dreamy ver.～", "img": "v1787748167/Web/miku_birthday_2026.jpg", "date": "2026-08-29", "price": 1600 },
-				{ "name": "Inugami Korone (Nuigurumi)", "img": "v1787747162/Web/korone_big_nui.webp", "date": "2026-08", "price": 1600 },
-				{ "name": "Nekomata Okayu (Nuigurumi)", "img": "v1787747162/Web/okayu_big_nui.webp", "date": "2026-08", "price": 1600 },
 				{ "name": "Rayza (Desktop Cute)", "img": "v1788583347/Web/rayza_desktop_cute.jpg", "date": "2026-09-12", "price": 1600 }
 			]
 		}
