@@ -2,17 +2,6 @@
 	"imageBase": "https://res.cloudinary.com/tsukiko/image/upload/",
 	"tabs": [
 		{
-			"id": "nuigurumi",
-			"label": "Nuigurumi",
-			"description": "Hololive plushies.",
-			"items": [
-				{ "name": "AZki", "img": "v1780196608/Web/azki.webp", "price": 1400 },
-				{ "name": "Sakura Miko", "img": "v1780227143/Web/miko.jpg", "price": 1400 },
-				{ "name": "Tokoyami Towa", "img": "v1780196608/Web/towa.webp", "price": 1400 },
-				{ "name": "Sakamata Kuroe", "img": "v1780197039/Web/kuroe.webp", "price": 1400 }
-			]
-		},
-		{
 			"id": "hikkake",
 			"label": "Hikkake",
 			"description": "Hololive Hikkake prize figures.",
@@ -25,7 +14,9 @@
 			"label": "Monthly 2026",
 			"description": "Releases I'm watching this year, in date order.",
 			"items": [
-				{ "name": "Rayza (Desktop Cute)", "img": "v1788583347/Web/rayza_desktop_cute.jpg", "date": "2026-09-12", "price": 1600 }
+				{ "name": "初音ミク melffy figure", "img": "v1791277185/Web/miku_melffy_figure.jpg", "date": "2026-10-17", "price": 1400 },
+				{ "name": "ぬーどるストッパー 百鬼あやめ", "img": "v1791277186/Web/ayame_noodle.jpg", "date": "2026-10-28", "price": 1400 },
+				{ "name": "雪ミク", "img": "v1791277186/Web/snow_miku_2014.jpg", "date": "2026-10-31", "price": 1600 }
 			]
 		}
 	]
