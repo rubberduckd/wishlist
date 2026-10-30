@@ -11,6 +11,12 @@ function escapeHtml(value) {
 	})[ch]);
 }
 
+// Names with kana or kanji get lang="ja", so browsers pick Japanese letterforms
+// over Chinese ones and screen readers use a Japanese voice.
+function nameLang(name) {
+	return /[぀-ヿ㐀-鿿]/.test(name) ? "ja" : "en";
+}
+
 // Cloudinary resizes on request when a transformation is put in front of the
 // version segment, so phones download a small copy instead of the original.
 // c_limit stops it from upscaling images that are already small.
@@ -60,10 +66,10 @@ function renderCard(item, imageBase) {
 
 	return `<li class="card">
 		<button class="card-img" type="button" data-full="${src(1200)}" data-name="${name}" aria-label="Show larger photo of ${name}">
-			<img src="${src(480)}" srcset="${srcset}" sizes="(max-width: 639px) 50vw, 260px" alt="" loading="lazy" decoding="async">
+			<img src="${src(480)}" srcset="${srcset}" sizes="(min-width: 1120px) 216px, (min-width: 900px) 25vw, (min-width: 520px) 33vw, 50vw" alt="" loading="lazy" decoding="async">
 		</button>
 		<div class="card-body">
-			<h3 class="card-title">${name}</h3>
+			<h2 class="card-title" lang="${nameLang(item.name)}" title="${name}">${name}</h2>
 			${date}
 			${price}
 		</div>
@@ -94,7 +100,7 @@ function selectTab(id, { focus = false } = {}) {
 
 	// Center the selected tab in the bar, which scrolls sideways on phones.
 	const bar = selected.parentElement;
-	bar.scrollTo({ left: selected.offsetLeft - (bar.clientWidth - selected.offsetWidth) / 2, behavior: "smooth" });
+	bar.scrollTo({ left: selected.offsetLeft - (bar.clientWidth - selected.offsetWidth) / 2 });
 
 	// When switching tabs from further down the page, jump back to the start
 	// of the new list instead of leaving the reader somewhere in the middle.
@@ -133,6 +139,12 @@ function render(data) {
 		panels.appendChild(panel);
 	});
 
+	// A bad image path shouldn't leave a blank square that looks like it's still
+	// loading. Error events don't bubble, so this listens in the capture phase.
+	panels.addEventListener("error", event => {
+		if (event.target.tagName === "IMG") event.target.closest(".card-img").disabled = true;
+	}, true);
+
 	// Arrow keys, Home and End move between tabs.
 	tabList.addEventListener("keydown", event => {
 		const tabs = [...tabList.querySelectorAll('[role="tab"]')];
@@ -158,12 +170,28 @@ function setUpViewer() {
 	const img = viewer.querySelector("img");
 	const caption = viewer.querySelector("figcaption");
 
+	const show = source => {
+		img.style.setProperty("--ratio", source.naturalWidth / source.naturalHeight || 1);
+		img.src = source.currentSrc || source.src;
+	};
+
 	document.getElementById("panels").addEventListener("click", event => {
 		const button = event.target.closest(".card-img");
 		if (!button) return;
-		img.src = button.dataset.full;
+
+		// Open on the thumbnail that's already loaded, then swap in the large copy
+		// once it arrives, unless the viewer has been closed or moved on by then.
+		show(button.querySelector("img"));
+		const thumbnail = img.src;
+		const full = new Image();
+		full.onload = () => {
+			if (img.src === thumbnail) show(full);
+		};
+		full.src = button.dataset.full;
+
 		img.alt = button.dataset.name;
 		caption.textContent = button.dataset.name;
+		caption.lang = nameLang(button.dataset.name);
 		viewer.showModal();
 	});
 

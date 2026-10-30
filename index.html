@@ -12,7 +12,7 @@
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+	<link rel="preconnect" href="https://res.cloudinary.com">
 	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 	<script defer src="render.js"></script>
@@ -21,7 +21,7 @@
 		:root {
 			--bg-0: #04100f;
 			--bg-1: #07211e;
-			--surface: rgba(255, 255, 255, 0.05);
+			--surface: rgba(4, 16, 15, 0.55);
 			--line: rgba(255, 255, 255, 0.12);
 			--accent-a: #44bfb7;   /* teal       */
 			--accent-b: #9ff0ea;   /* aqua       */
@@ -35,15 +35,16 @@
 
 		* { box-sizing: border-box; }
 
-		html { background: var(--bg-0); -webkit-text-size-adjust: 100%; }
+		/* scroll-padding keeps keyboard focus from landing under the sticky tab bar. */
+		html { background: var(--bg-0); -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 		html:has(dialog[open]) { overflow: hidden; }
 
+		/* No background here: the aurora sits behind body, so one would hide it. */
 		body {
 			min-height: 100vh;
 			min-height: 100dvh;
 			margin: 0;
 			color: var(--ink);
-			background: var(--bg-0);
 			font-family: "Poppins", system-ui, sans-serif;
 			overflow-x: hidden;
 			position: relative;
@@ -119,6 +120,7 @@
 			z-index: 20;
 			display: flex;
 			justify-content: center;
+			min-height: calc(3.35rem + 2px);
 			margin-bottom: 1.25rem;
 		}
 		.tabs {
@@ -137,6 +139,7 @@
 			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 		}
 		.tabs::-webkit-scrollbar { display: none; }
+		.tabs:empty { visibility: hidden; }
 		.tab {
 			flex: none;
 			display: inline-flex;
@@ -153,8 +156,9 @@
 			font-weight: 500;
 			white-space: nowrap;
 			cursor: pointer;
-			transition: color .2s, background .2s;
+			transition: color .2s, background .2s, transform .1s;
 		}
+		.tab:active { transform: scale(.96); }
 		.tab-count {
 			min-width: 1.5rem;
 			padding: .1rem .4rem;
@@ -187,18 +191,24 @@
 		}
 		.load-error { color: #ff8fa3; }
 
+		/* Flex rather than grid, so a short last row or a lone card stays centered
+		   under the centered header instead of hanging off to the left. */
 		.grid {
+			--cols: 2;
+			--gap: .75rem;
 			list-style: none;
 			margin: 0;
 			padding: 0;
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(9.25rem, 1fr));
-			gap: .75rem;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: var(--gap);
 		}
 
 		.card {
 			display: flex;
 			flex-direction: column;
+			width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
 			border-radius: 16px;
 			overflow: hidden;
 			background: var(--surface);
@@ -222,6 +232,19 @@
 			object-fit: cover;
 		}
 		.card-img:focus-visible { outline: 2px solid var(--accent-b); outline-offset: -2px; }
+		.card-img:active img { opacity: .8; }
+
+		/* render.js disables the button when its photo fails to load. */
+		.card-img:disabled {
+			display: grid;
+			place-items: center;
+			color: var(--ink-faint);
+			font: inherit;
+			font-size: .8rem;
+			cursor: default;
+		}
+		.card-img:disabled img { display: none; }
+		.card-img:disabled::after { content: "Photo unavailable"; }
 
 		.card-body {
 			flex: 1;
@@ -261,17 +284,29 @@
 			color: var(--on-accent);
 			background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
 		}
-		.card-price span { font-weight: 500; opacity: .7; }
+		.card-price span { font-weight: 500; opacity: .85; }
+
+		@media (min-width: 520px) {
+			.grid { --cols: 3; }
+		}
 
 		@media (min-width: 640px) {
 			.hero { padding-top: calc(4.5rem + env(safe-area-inset-top)); padding-bottom: 2.5rem; }
 			.hero p { font-size: 1rem; }
 			.tabs-wrap { margin-bottom: 1.75rem; }
-			.grid { grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1.25rem; }
+			.grid { --gap: 1.25rem; }
 			.card { border-radius: 20px; }
 			.card-body { padding: .95rem 1.05rem 1.1rem; }
 			.card-title { font-size: 1.02rem; }
 			.card-date, .card-price { font-size: .82rem; }
+		}
+
+		@media (min-width: 900px) {
+			.grid { --cols: 4; }
+		}
+
+		@media (min-width: 1120px) {
+			.grid { --cols: 5; }
 		}
 
 		/* Hover effects only where there is a real pointer, so they don't stick after a tap. */
@@ -305,10 +340,12 @@
 			align-items: center;
 			gap: .8rem;
 		}
+		/* render.js sets --ratio (width / height) so the box is already its final
+		   size while the large photo loads, and doesn't jump when it arrives. */
 		.viewer img {
 			display: block;
-			max-width: 100%;
-			max-height: calc(92dvh - 7rem);
+			width: min(92vw, 40rem, calc((92dvh - 7rem) * var(--ratio, 1)));
+			aspect-ratio: var(--ratio, 1);
 			border-radius: 16px;
 			object-fit: contain;
 		}
@@ -330,6 +367,11 @@
 			cursor: pointer;
 		}
 		.viewer-close:focus-visible { outline: 2px solid var(--accent-b); outline-offset: 2px; }
+		.viewer-close:active { background: rgba(255, 255, 255, 0.12); }
+
+		@media (prefers-reduced-motion: no-preference) {
+			.tabs { scroll-behavior: smooth; }
+		}
 
 		@media (prefers-reduced-motion: reduce) {
 			body::before { animation: none; }
